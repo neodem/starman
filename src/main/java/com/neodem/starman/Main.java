@@ -12,6 +12,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 
+/**
+ * will read the google reader starred.json file into objects
+ * 
+ * @author vfumo
+ * 
+ */
 public class Main {
 
 	public Main(String[] args) throws JsonParseException, IOException {
@@ -125,14 +131,14 @@ public class Main {
 		while (jp.nextToken() != JsonToken.END_OBJECT)
 			;
 	}
-	
+
 	private String getContent(JsonParser jp) throws IOException {
 		if (jp.getCurrentToken() != JsonToken.START_OBJECT) {
 			throw new IOException("Expected to find an object here");
 		}
-		
+
 		String content = null;
-		
+
 		while (jp.nextToken() != JsonToken.END_OBJECT) {
 			if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
 				if (jp.getCurrentName().equals("content")) {
@@ -141,7 +147,7 @@ public class Main {
 				}
 			}
 		}
-		
+
 		return content;
 	}
 
